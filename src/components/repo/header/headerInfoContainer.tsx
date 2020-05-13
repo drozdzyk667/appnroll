@@ -72,6 +72,7 @@ const HeaderInfo: React.FC<OrgProps> = ({ organization }) => {
         <Box>
           <Typography
             variant="h6"
+            data-testid="company-name"
             className={`${classes.typographyFont} ${classes.header}`}
           >{`${organization?.name} repositories`}</Typography>
           <Typography
@@ -90,7 +91,7 @@ const HeaderInfo: React.FC<OrgProps> = ({ organization }) => {
             <Box className={classes.container}>
               <LinkIcon className={classes.linkIcon} fontSize="small" />
               <Link href={organization?.websiteUrl} target={"_blank"}>
-                <Typography className={classes.info}>
+                <Typography data-testid="website-url" className={classes.info}>
                   {organization?.websiteUrl}
                 </Typography>
               </Link>

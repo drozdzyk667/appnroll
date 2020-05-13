@@ -9,7 +9,7 @@ import {
   InputLabel,
   Select,
 } from "@material-ui/core"
-import { StatusProps } from "../repositoryContainer"
+import { StatusProps } from "../../../helpers/Repos.constants"
 import SearchIcon from "@material-ui/icons/Search"
 
 const useStyles = makeStyles((theme: Theme) => ({

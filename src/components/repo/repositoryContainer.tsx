@@ -6,11 +6,8 @@ import FilterContainer from "./filters/filteringContainer"
 import { useWindowProperties } from "../../helpers/useWidth"
 import usePagintion from "../../helpers/usePagination"
 import PaginationContainer from "./pagination/paginationContainer"
-import {
-  useGithubOrganization,
-  RepoProps,
-} from "../../queries/hooks/useGithubOrganization"
-import { FONT_LINK } from "../../helpers/Repos.constants"
+import { useGithubOrganization } from "../../queries/hooks/useGithubOrganization"
+import { FONT_LINK, StatusProps } from "../../helpers/Repos.constants"
 
 const ReposGridContainer = React.lazy(() =>
   import("./reposGrid/reposGridContainer")
@@ -27,11 +24,6 @@ const useStyles = makeStyles({
     fontFamily: "'Quicksand', sans-serif",
   },
 })
-
-export interface StatusProps extends RepoProps {
-  id: number
-  isFav: boolean
-}
 
 const RepositoryContent: React.FC<{}> = () => {
   const classes = useStyles()
@@ -84,17 +76,13 @@ const RepositoryContent: React.FC<{}> = () => {
   ) => {
     const { id } = event.currentTarget.dataset
     if (id) {
-      setRepos(
-        repos.map((repo) =>
-          repo.id === parseInt(id, 10) ? { ...repo, isFav: !repo.isFav } : repo
-        )
+      const updatedRepos = repos.map((repo) =>
+        repo.id === parseInt(id, 10) ? { ...repo, isFav: !repo.isFav } : repo
       )
+      setRepos(updatedRepos)
+      localStorage.setItem("favRepos", JSON.stringify(updatedRepos))
     }
   }
-
-  React.useEffect(() => {
-    localStorage.setItem("favRepos", JSON.stringify(repos))
-  }, [repos])
 
   React.useEffect(() => {
     if (width >= 1150) {

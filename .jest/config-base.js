@@ -18,6 +18,7 @@ module.exports = {
   },
   testURL: "http://localhost",
   setupFiles: [
+    "<rootDir>/src/setupTests.ts",
     "<rootDir>/.jest/register-context.js",
     "<rootDir>/.jest/loadershim.js",
   ],

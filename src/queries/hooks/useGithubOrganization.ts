@@ -1,23 +1,5 @@
 import { useStaticQuery, graphql } from "gatsby"
-import { LangColors } from "../../helpers/Repos.constants"
-
-export interface RepoProps {
-  isPrivate: boolean
-  nameWithOwner: string
-  description: string
-  collaborators: {
-    totalCount: number
-  }
-  forkCount: number
-  stargazers: {
-    totalCount: number
-  }
-  languages: {
-    nodes: { name: keyof typeof LangColors }[]
-  }
-  name: string
-  url: string
-}
+import { RepoProps } from "../../helpers/Repos.constants"
 
 interface Organization {
   organization: {

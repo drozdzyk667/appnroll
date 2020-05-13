@@ -1,6 +1,6 @@
 import React from "react"
 import { Box, makeStyles, Typography, Link } from "@material-ui/core"
-import { StatusProps } from "../repositoryContainer"
+import { StatusProps } from "../../../helpers/Repos.constants"
 import DoneIcon from "@material-ui/icons/Done"
 import AddIcon from "@material-ui/icons/Add"
 import StarRateIcon from "@material-ui/icons/StarRate"
@@ -102,7 +102,9 @@ const RepoSingle: React.FC<RepoSingle> = ({
           >
             <OpenInNewIcon fontSize="small" />
             <Link href={repo?.url} target={"_blank"}>
-              <Box mx={0.5}>{repo.nameWithOwner}</Box>
+              <Box data-testid="nameWithOwner" mx={0.5}>
+                {repo.nameWithOwner}
+              </Box>
             </Link>
           </Typography>
           {repo.description ? (

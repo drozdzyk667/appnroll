@@ -6,6 +6,7 @@ const {
   NODE_ENV,
   SITE_URL,
   GITHUB_TOKEN,
+  GITHUB_API_URI,
   URL: NETLIFY_SITE_URL = SITE_URL,
   DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
   CONTEXT: NETLIFY_ENV = NODE_ENV,
@@ -18,7 +19,7 @@ const siteUrl = netlifyProduction
 module.exports = {
   siteMetadata: {
     title: `App'n'roll Repository`,
-    description: `App'n'roll repository application`,
+    description: `App'n'roll repository app`,
     author: `xxx`,
     siteUrl,
   },
@@ -29,7 +30,7 @@ module.exports = {
       options: {
         typeName: `gitHub`,
         fieldName: `getGithubOrganization`,
-        url: `https://api.github.com/graphql`,
+        url: GITHUB_API_URI,
         headers: {
           Authorization: `Bearer ${GITHUB_TOKEN}`,
         },

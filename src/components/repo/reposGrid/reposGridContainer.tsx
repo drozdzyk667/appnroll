@@ -1,7 +1,6 @@
 import React from "react"
 import { Box, makeStyles, Typography, Theme } from "@material-ui/core"
-import { StatusProps } from "../repositoryContainer"
-import { LangColors } from "../../../helpers/Repos.constants"
+import { LangColors, StatusProps } from "../../../helpers/Repos.constants"
 import RepoSingle from "./repoSingle"
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -39,6 +38,7 @@ const ReposGridContainer: React.FC<ReposGrid> = ({
 }) => {
   const classes = useStyles()
   const NO_DATA = currentData().length !== 0
+  const DEFAULT = LangColors.default
 
   return (
     <Box>
@@ -50,15 +50,17 @@ const ReposGridContainer: React.FC<ReposGrid> = ({
               className={classes.singleContainer}
               style={{
                 borderTop: `6px solid ${
-                  LangColors[repo?.languages?.nodes[0]?.name] ??
-                  LangColors.default
+                  repo.languages
+                    ? LangColors[repo?.languages?.nodes[0]?.name ?? DEFAULT]
+                    : DEFAULT
                 }`,
               }}
             >
               <RepoSingle
                 color={
-                  LangColors[repo?.languages?.nodes[0]?.name] ??
-                  LangColors.default
+                  repo.languages
+                    ? LangColors[repo?.languages?.nodes[0]?.name ?? DEFAULT]
+                    : DEFAULT
                 }
                 repo={repo}
                 handleToggleFavRepo={handleToggleFavRepo}

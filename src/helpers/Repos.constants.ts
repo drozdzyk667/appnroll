@@ -1,3 +1,6 @@
+export const FONT_LINK =
+  "https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap"
+
 export enum LangColors {
   Kotlin = "#F18E33",
   HTML = "#e44b23",
@@ -12,5 +15,25 @@ export enum LangColors {
   default = "#ccf000",
 }
 
-export const FONT_LINK =
-  "https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap"
+export interface RepoProps {
+  isPrivate: boolean
+  nameWithOwner: string
+  description: string
+  collaborators: {
+    totalCount: number
+  }
+  forkCount: number
+  stargazers: {
+    totalCount: number
+  }
+  languages?: {
+    nodes: { name: keyof typeof LangColors }[]
+  }
+  name: string
+  url: string
+}
+
+export interface StatusProps extends RepoProps {
+  id: number
+  isFav: boolean
+}
