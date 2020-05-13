@@ -115,7 +115,7 @@ const RepositoryContent: React.FC<{}> = () => {
     handleFilterByRepoName,
   }
 
-  const paginationProps = {
+  const paginationData = {
     maxPage,
     jump,
     currentPage,
@@ -136,7 +136,7 @@ const RepositoryContent: React.FC<{}> = () => {
             currentData={currentData}
           />
         </React.Suspense>
-        <PaginationContainer {...paginationProps} />
+        <PaginationContainer {...paginationData} />
       </Box>
     </>
   )
