@@ -3,6 +3,15 @@ import { LangColors } from "../../helpers/Repos.constants"
 
 export interface RepoProps {
   isPrivate: boolean
+  nameWithOwner: string
+  description: string
+  collaborators: {
+    totalCount: number
+  }
+  forkCount: number
+  stargazers: {
+    totalCount: number
+  }
   languages: {
     nodes: { name: keyof typeof LangColors }[]
   }
@@ -47,8 +56,18 @@ export const useGithubOrganization = () => {
             websiteUrl
             repositories(first: 100) {
               nodes {
+                isPrivate
                 name
+                description
                 url
+                nameWithOwner
+                collaborators {
+                  totalCount
+                }
+                stargazers {
+                  totalCount
+                }
+                forkCount
                 languages(first: 1) {
                   nodes {
                     name
@@ -63,10 +82,12 @@ export const useGithubOrganization = () => {
     `
   )
 
+  const favRepos = getGithubOrganization?.organization?.repositories?.nodes.map(
+    (node, index) => ({ ...node, id: index + 1, isFav: false })
+  )
+
   return {
-    favRepos: getGithubOrganization?.organization?.repositories?.nodes.map(
-      (node, index) => ({ ...node, id: index + 1, isFav: false })
-    ),
+    favRepos,
     organization: getGithubOrganization
       ? getGithubOrganization.organization
       : null,

@@ -7,8 +7,9 @@ export enum LangColors {
   CSS = "#563d7c",
   Shell = "#89e051",
   Ruby = "#701516",
+  MakeFile = "#ccf000",
   Dockerfile = "#000",
-  MakeFile = "#000",
+  default = "#ccf000",
 }
 
 export const FONT_LINK =

@@ -9,7 +9,7 @@ import {
   InputLabel,
   Select,
 } from "@material-ui/core"
-import { StatusProps } from "./repositoryContent"
+import { StatusProps } from "../repositoryContainer"
 import SearchIcon from "@material-ui/icons/Search"
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -69,7 +69,7 @@ const FilterContainer: React.FC<FilterProps & { repos: StatusProps[] }> = ({
   const classes = useStyles()
 
   const noDuplicatedLanguages: string[] = repos
-    .map((repo) => repo.languages.nodes[0].name)
+    .map((repo) => repo?.languages?.nodes[0]?.name)
     .reduce(
       (uniq: string[], item) => (uniq.includes(item) ? uniq : [...uniq, item]),
       []

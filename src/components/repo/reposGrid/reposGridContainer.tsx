@@ -1,9 +1,8 @@
 import React from "react"
 import { Box, makeStyles, Typography, Theme } from "@material-ui/core"
-import { StatusProps } from "./repositoryContent"
-import { LangColors } from "../../helpers/Repos.constants"
-import DoneIcon from "@material-ui/icons/Done"
-import AddIcon from "@material-ui/icons/Add"
+import { StatusProps } from "../repositoryContainer"
+import { LangColors } from "../../../helpers/Repos.constants"
+import RepoSingle from "./repoSingle"
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -21,24 +20,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   singleContainer: {
     width: "320px",
     height: "240px",
-    padding: "10px",
     margin: "0.5em",
     borderRadius: "6px",
     border: "1px solid lightgray",
-  },
-  fav: {
-    width: "30px",
-    height: "30px",
-    color: "white",
-    display: "flex",
-    cursor: "pointer",
-    transition: "0.3s",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#482bff",
-    "&:hover": {
-      transform: "scale(0.9)",
-    },
   },
 }))
 
@@ -66,20 +50,19 @@ const ReposGridContainer: React.FC<ReposGrid> = ({
               className={classes.singleContainer}
               style={{
                 borderTop: `6px solid ${
-                  LangColors[repo.languages.nodes[0].name]
+                  LangColors[repo?.languages?.nodes[0]?.name] ??
+                  LangColors.default
                 }`,
               }}
             >
-              <Box>
-                <Typography>{repo.name}</Typography>
-                <Box
-                  data-id={repo.id}
-                  className={classes.fav}
-                  onClick={handleToggleFavRepo}
-                >
-                  {repo.isFav ? <DoneIcon /> : <AddIcon />}
-                </Box>
-              </Box>
+              <RepoSingle
+                color={
+                  LangColors[repo?.languages?.nodes[0]?.name] ??
+                  LangColors.default
+                }
+                repo={repo}
+                handleToggleFavRepo={handleToggleFavRepo}
+              />
             </Box>
           ))
         ) : (

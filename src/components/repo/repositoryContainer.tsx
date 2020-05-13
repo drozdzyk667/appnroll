@@ -1,8 +1,8 @@
 import React from "react"
 import { Box, makeStyles, Theme, CircularProgress } from "@material-ui/core"
 import { Helmet } from "react-helmet"
-import HeaderInfo from "./headerInfoContainer"
-import FilterContainer from "./filteringContainer"
+import HeaderInfo from "./header/headerInfoContainer"
+import FilterContainer from "./filters/filteringContainer"
 import { useWindowProperties } from "../../helpers/useWidth"
 import usePagintion from "../../helpers/usePagination"
 import Pagination from "@material-ui/lab/Pagination"
@@ -12,7 +12,9 @@ import {
 } from "../../queries/hooks/useGithubOrganization"
 import { FONT_LINK } from "../../helpers/Repos.constants"
 
-const ReposGridContainer = React.lazy(() => import("./reposGridContainer"))
+const ReposGridContainer = React.lazy(() =>
+  import("./reposGrid/reposGridContainer")
+)
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -45,7 +47,10 @@ const RepositoryContent: React.FC<{}> = () => {
   const classes = useStyles()
   const { width } = useWindowProperties()
   const { favRepos, organization } = useGithubOrganization()
-  const [repos, setRepos] = React.useState<StatusProps[]>(favRepos)
+  const storageFavRepos = JSON.parse(
+    localStorage.getItem("favRepos") || JSON.stringify(favRepos)
+  )
+  const [repos, setRepos] = React.useState<StatusProps[]>(storageFavRepos)
   const [filterValue, setFilterValue] = React.useState<string>("")
   const [language, setLanguage] = React.useState<string>("")
   const [onPage, setOnPage] = React.useState<number>(6)
@@ -99,6 +104,10 @@ const RepositoryContent: React.FC<{}> = () => {
   }
 
   React.useEffect(() => {
+    localStorage.setItem("favRepos", JSON.stringify(repos))
+  }, [repos])
+
+  React.useEffect(() => {
     if (width >= 1150) {
       setOnPage(6)
     } else if (width < 1150 && width > 850) {
@@ -122,6 +131,7 @@ const RepositoryContent: React.FC<{}> = () => {
       <Helmet>
         <link href={FONT_LINK} rel="stylesheet" />
       </Helmet>
+      {console.log(storageFavRepos)}
       <Box className={classes.root}>
         <HeaderInfo organization={organization} />
         <FilterContainer {...filterComponentData} />
