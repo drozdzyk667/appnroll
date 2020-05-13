@@ -29,9 +29,10 @@ const RepositoryContent: React.FC<{}> = () => {
   const classes = useStyles()
   const { width } = useWindowProperties()
   const { favRepos, organization } = useGithubOrganization()
-  const storageFavRepos = JSON.parse(
-    localStorage.getItem("favRepos") || JSON.stringify(favRepos)
-  )
+  const storageFavRepos =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("favRepos") || JSON.stringify(favRepos))
+      : favRepos
   const [repos, setRepos] = React.useState<StatusProps[]>(storageFavRepos)
   const [filterValue, setFilterValue] = React.useState<string>("")
   const [language, setLanguage] = React.useState<string>("")
