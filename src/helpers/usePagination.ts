@@ -1,5 +1,5 @@
 import React from "react"
-import { StatusProps } from "../components/repo/repositoryContainer"
+import { StatusProps } from "../helpers/Repos.constants"
 
 const usePagination = (data: StatusProps[], itemsPerPage: number) => {
   const [currentPage, setCurrentPage] = React.useState(1)

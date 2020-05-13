@@ -45,7 +45,7 @@ const RepositoryContent: React.FC<{}> = () => {
     return repos.filter(
       (data) =>
         data.name.toLowerCase().match(filterValue.toLowerCase()) &&
-        data.languages.nodes[0].name.match(language)
+        data.languages?.nodes[0].name.match(language)
     )
   }
 
