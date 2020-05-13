@@ -1,17 +1,14 @@
 import React from "react"
-import { Box, makeStyles, CircularProgress } from "@material-ui/core"
+import { Box, makeStyles } from "@material-ui/core"
 import { Helmet } from "react-helmet"
 import HeaderInfo from "./header/headerInfoContainer"
 import FilterContainer from "./filters/filteringContainer"
 import { useWindowProperties } from "../../helpers/useWidth"
 import usePagintion from "../../helpers/usePagination"
+import ReposGridContainer from "./reposGrid/reposGridContainer"
 import PaginationContainer from "./pagination/paginationContainer"
 import { useGithubOrganization } from "../../queries/hooks/useGithubOrganization"
 import { FONT_LINK, StatusProps } from "../../helpers/Repos.constants"
-
-const ReposGridContainer = React.lazy(() =>
-  import("./reposGrid/reposGridContainer")
-)
 
 const useStyles = makeStyles({
   root: {
@@ -119,12 +116,10 @@ const RepositoryContent: React.FC<{}> = () => {
       <Box className={classes.root}>
         <HeaderInfo organization={organization} />
         <FilterContainer {...filterComponentData} />
-        <React.Suspense fallback={<CircularProgress />}>
-          <ReposGridContainer
-            handleToggleFavRepo={handleToggleFavRepo}
-            currentData={currentData}
-          />
-        </React.Suspense>
+        <ReposGridContainer
+          handleToggleFavRepo={handleToggleFavRepo}
+          currentData={currentData}
+        />
         <PaginationContainer {...paginationData} />
       </Box>
     </>
