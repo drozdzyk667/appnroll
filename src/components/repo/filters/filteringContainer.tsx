@@ -71,7 +71,7 @@ const FilterContainer: React.FC<FilterProps & { repos: StatusProps[] }> = ({
   const noDuplicatedLanguages: string[] = repos
     .map((repo) => repo?.languages?.nodes[0]?.name)
     .reduce(
-      (uniq: string[], item) => (uniq.includes(item) ? uniq : [...uniq, item]),
+      (uniq: any[], item) => (uniq.includes(item) ? uniq : [...uniq, item]),
       []
     )
 
