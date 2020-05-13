@@ -1,7 +1,9 @@
 import React from "react"
-
 export const useWindowProperties = () => {
-  const [width, setWidth] = React.useState<number>(window.innerWidth)
+  const globalAny: any = global
+  const appWindow =
+    typeof window === "undefined" ? globalAny.window : window.innerWidth
+  const [width, setWidth] = React.useState<number>(appWindow)
 
   React.useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth)
