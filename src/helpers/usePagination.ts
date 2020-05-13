@@ -10,10 +10,9 @@ const usePagination = (data: StatusProps[], itemsPerPage: number) => {
     const end = begin + itemsPerPage
     return data.slice(begin, end)
   }
-  const jump = (event: unknown, page: number) => {
-    setCurrentPage(() => page)
+  const jump = (_event: unknown, page: number) => {
+    setCurrentPage(page)
   }
-
   return { jump, currentData, currentPage, maxPage }
 }
 

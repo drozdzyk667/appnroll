@@ -74,7 +74,7 @@ const RepositoryContent: React.FC<{}> = () => {
   }
 
   const handlePickLanguage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    jump("", 1)
+    jump(null, 1)
     setLanguage(event.target.value)
   }
 
@@ -86,7 +86,7 @@ const RepositoryContent: React.FC<{}> = () => {
   const handleFilterByRepoName = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    jump("", 1)
+    jump(null, 1)
     setFilterValue(event.target.value)
   }
 
