@@ -1,11 +1,11 @@
 import React from "react"
-import { Box, makeStyles, Theme, CircularProgress } from "@material-ui/core"
+import { Box, makeStyles, CircularProgress } from "@material-ui/core"
 import { Helmet } from "react-helmet"
 import HeaderInfo from "./header/headerInfoContainer"
 import FilterContainer from "./filters/filteringContainer"
 import { useWindowProperties } from "../../helpers/useWidth"
 import usePagintion from "../../helpers/usePagination"
-import Pagination from "@material-ui/lab/Pagination"
+import PaginationContainer from "./pagination/paginationContainer"
 import {
   useGithubOrganization,
   RepoProps,
@@ -16,7 +16,7 @@ const ReposGridContainer = React.lazy(() =>
   import("./reposGrid/reposGridContainer")
 )
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles({
   root: {
     width: "100%",
     display: "flex",
@@ -26,17 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: "center",
     fontFamily: "'Quicksand', sans-serif",
   },
-  pagination: {
-    display: "flex",
-    marginTop: "10px",
-    marginRight: "20px",
-    justifyContent: "flex-end",
-    [theme.breakpoints.down("xs")]: {
-      width: "400px",
-      marginLeft: "50px",
-    },
-  },
-}))
+})
 
 export interface StatusProps extends RepoProps {
   id: number
@@ -54,7 +44,6 @@ const RepositoryContent: React.FC<{}> = () => {
   const [filterValue, setFilterValue] = React.useState<string>("")
   const [language, setLanguage] = React.useState<string>("")
   const [onPage, setOnPage] = React.useState<number>(6)
-  const NO_DATA = repos.length === 0
 
   const getFilteredRepos = () => {
     if (!filterValue && !language) {
@@ -126,12 +115,18 @@ const RepositoryContent: React.FC<{}> = () => {
     handleFilterByRepoName,
   }
 
+  const paginationProps = {
+    maxPage,
+    jump,
+    currentPage,
+    dataLength: repos.length,
+  }
+
   return (
     <>
       <Helmet>
         <link href={FONT_LINK} rel="stylesheet" />
       </Helmet>
-      {console.log(storageFavRepos)}
       <Box className={classes.root}>
         <HeaderInfo organization={organization} />
         <FilterContainer {...filterComponentData} />
@@ -141,20 +136,7 @@ const RepositoryContent: React.FC<{}> = () => {
             currentData={currentData}
           />
         </React.Suspense>
-        <Box className={classes.pagination}>
-          <Pagination
-            size="small"
-            color="primary"
-            count={maxPage}
-            page={currentPage}
-            defaultPage={1}
-            onChange={jump}
-            showFirstButton={!NO_DATA}
-            showLastButton={!NO_DATA}
-            hideNextButton={NO_DATA}
-            hidePrevButton={NO_DATA}
-          />
-        </Box>
+        <PaginationContainer {...paginationProps} />
       </Box>
     </>
   )
