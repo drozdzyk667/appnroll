@@ -43,7 +43,7 @@ export const useGithubOrganization = () => {
                 description
                 url
                 nameWithOwner
-                collaborators {
+                assignableUsers {
                   totalCount
                 }
                 stargazers {

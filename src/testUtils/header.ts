@@ -10,7 +10,7 @@ export const HeaderMock = {
   repositories: {
     nodes: [
       {
-        collaborators: null,
+        assignableUsers: null,
         isPrivate: false,
         description: "test_1",
         forkCount: 23,
@@ -25,7 +25,7 @@ export const HeaderMock = {
         url: "http://test.test",
       },
       {
-        collaborators: null,
+        assignableUsers: null,
         isPrivate: false,
         description: "test_2",
         forkCount: 2,

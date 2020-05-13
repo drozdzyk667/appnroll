@@ -19,7 +19,7 @@ export interface RepoProps {
   isPrivate: boolean
   nameWithOwner: string
   description: string
-  collaborators: {
+  assignableUsers: {
     totalCount: number
   }
   forkCount: number

@@ -1,6 +1,6 @@
 export const ReposGridMock = {
   id: 1,
-  collaborators: { totalCount: 22 },
+  assignableUsers: { totalCount: 22 },
   isFav: true,
   isPrivate: false,
   description: "test_1",

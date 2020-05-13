@@ -142,7 +142,7 @@ const RepoSingle: React.FC<RepoSingle> = ({
           </Box>
           <Box className={classes.rowContainer}>
             <PersonIcon fontSize="small" />
-            {repo?.collaborators?.totalCount ?? 0}
+            {repo?.assignableUsers?.totalCount ?? 0}
           </Box>
           <Box className={classes.rowContainer}>
             <TransformIcon fontSize="small" />
