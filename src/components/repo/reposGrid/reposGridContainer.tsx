@@ -51,7 +51,7 @@ const ReposGridContainer: React.FC<ReposGrid> = ({
               style={{
                 borderTop: `6px solid ${
                   repo.languages
-                    ? LangColors[repo?.languages?.nodes[0]?.name ?? DEFAULT]
+                    ? LangColors[repo?.languages?.nodes[0]?.name] || DEFAULT
                     : DEFAULT
                 }`,
               }}
@@ -59,7 +59,7 @@ const ReposGridContainer: React.FC<ReposGrid> = ({
               <RepoSingle
                 color={
                   repo.languages
-                    ? LangColors[repo?.languages?.nodes[0]?.name ?? DEFAULT]
+                    ? LangColors[repo?.languages?.nodes[0]?.name] || DEFAULT
                     : DEFAULT
                 }
                 repo={repo}
