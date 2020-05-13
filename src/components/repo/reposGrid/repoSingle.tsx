@@ -105,11 +105,13 @@ const RepoSingle: React.FC<RepoSingle> = ({
               <Box mx={0.5}>{repo.nameWithOwner}</Box>
             </Link>
           </Typography>
-          <Typography variant="subtitle1">
-            <Box mx={1} className={classes.desc}>
-              {`${repo.description?.slice(0, 50)}...`}
-            </Box>
-          </Typography>
+          {repo.description ? (
+            <Typography variant="subtitle1">
+              <Box mx={1} className={classes.desc}>
+                {`${repo.description.slice(0, 50)}...`}
+              </Box>
+            </Typography>
+          ) : null}
         </Box>
         <Box className={classes.favContainer}>
           <Box
